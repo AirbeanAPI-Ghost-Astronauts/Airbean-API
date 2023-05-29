@@ -1,0 +1,5 @@
+[
+  { "name": "Espresso", "description": "Dark Roast", "price": 49 },
+  { "name": "Mocha", "description": "Medium Roast", "price": 59 },
+  { "name": "Flat White", "description": "Medium Roast", "price": 69 }
+]
