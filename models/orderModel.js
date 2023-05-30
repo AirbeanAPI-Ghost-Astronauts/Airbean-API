@@ -1,33 +1,35 @@
-//creating a model for beans
-
 const mongoose = require("mongoose");
 
 const ordersSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "Please add a name"]
+      required: [true, "Please add a coffee from the menu !!"],
     },
     quantity: {
       type: Number,
-      required: [true, "Please add a quantity"],
-      default: 0
+      required: [true, "Please add the quantity"],
+      default: 0,
     },
     price: {
       type: Number,
-      required: [true, "Please add a price"],
-      default: 0
+      required: [true, "Check the price"],
+      default: 0,
     },
-    description: {
+    status: {
       type: String,
-      required: [true, "Please add a description"]
-    }
+      enum: ["pending", "delivered"],
+      default: "pending",
+    },
+    estimatedDeliveryTime: {
+      type: String,
+    },
   },
   {
-    timestamps: true
+    timestamps: true,
   }
 );
 
-const Order = mongoose.model("beans", ordersSchema);
+const Order = mongoose.model("Order", ordersSchema);
 
 module.exports = Order;

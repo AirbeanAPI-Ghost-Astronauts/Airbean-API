@@ -1,9 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const moment = require("moment");
 
 //step 4 importing product model.
-const Orders = require("./models/orderModel.js");
+const Order = require("./models/orderModel.js");
 const User = require("./models/userModel.js");
 const Menu = require("./models/menuModel.js");
 
@@ -42,11 +43,11 @@ app.post("/api/beans/order", async (req, res) => {
 
 // Create a new user
 app.post("/api/user/signup", async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
   try {
     // Check if the user already exists
-    const existingUser = await User.findOne({ username });
+    const existingUser = await User.findOne({ email });
 
     if (existingUser) {
       return res.status(400).json({ error: "User already exists" });
@@ -56,7 +57,7 @@ app.post("/api/user/signup", async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create a new user
-    const user = await User.create({ username, password: hashedPassword });
+    const user = await User.create({ email, password: hashedPassword });
 
     // Save the user to the database
     await user.save();
@@ -70,11 +71,11 @@ app.post("/api/user/signup", async (req, res) => {
 
 // User login
 app.post("/api/user/login", async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
   try {
     // Find the user by email
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ email });
 
     if (!user) {
       return res.status(401).json({ error: "Invalid credentials" });
@@ -96,7 +97,7 @@ app.post("/api/user/login", async (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-// creating mongoose connection
+//step 1 creating mongoose connection
 const run = async () => {
   try {
     await mongoose
