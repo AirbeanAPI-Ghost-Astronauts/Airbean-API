@@ -119,4 +119,4 @@ http://localhost:5000/api/user/6475a4093e4bf94e3bdea98f/history/
 
 Each coffees delivery time is 10 minutes , so this route compares the current time with estimated delivery time and shows if the order has been deliverd or still ongoing.
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+ ![Response Example]([https://raw.github.com/ryanmaxwell/iArrived/master/Screenshots/Settings.png](https://raw.githubusercontent.com/AirbeanAPI-Ghost-Astronauts/Airbean-API/main/screenshots/screenshot1.png))
