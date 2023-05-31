@@ -3,16 +3,16 @@ const mongoose = require("mongoose");
 const menuSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
+    required: true
   },
   description: {
     type: String,
-    required: true,
+    required: true
   },
   price: {
     type: Number,
-    required: true,
-  },
+    required: true
+  }
 });
 
 const Menu = mongoose.model("Menu", menuSchema);
