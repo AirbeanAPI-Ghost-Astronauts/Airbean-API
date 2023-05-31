@@ -166,5 +166,9 @@ Example url:
 http://localhost:5000/api/user/status/6477483c98f2ef34a36b755c
 
 
-![resonse example](https://raw.githubusercontent.com/AirbeanAPI-Ghost-Astronauts/Airbean-API/main/screenshots/screenshot1.png)
+
 ```
+
+Example response:
+
+![resonse example](https://raw.githubusercontent.com/AirbeanAPI-Ghost-Astronauts/Airbean-API/main/screenshots/screenshot1.png)
