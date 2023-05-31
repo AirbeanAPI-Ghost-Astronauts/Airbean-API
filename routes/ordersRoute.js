@@ -30,7 +30,7 @@ router.post("/api/beans/orders", async (req, res) => {
     if (menu.length !== drinksId.length) {
       return res.status(400).json({ error: "Coffee not found" });
     }
-    const itemsInCart = cart.map((item) => {
+    const cartItem = cart.map((item) => {
       const menuItem = menu.find((coffee) => coffee._id.toString() === item.id);
       const price = menuItem.price * item.quantity;
       return {
@@ -40,6 +40,7 @@ router.post("/api/beans/orders", async (req, res) => {
         name: menuItem.name
       };
     });
+    const totalPrice = cartItem.reduce((acc, item) => acc + item.price, 0);
     const currentTime = moment().local();
     const timeToMakeOrderReady = 10;
     const ordersEstimatedDeliveryTime = moment(currentTime)
@@ -47,7 +48,7 @@ router.post("/api/beans/orders", async (req, res) => {
       .format("LLLL");
 
     const order = new Order({
-      cart: itemsInCart,
+      cart: cartItem,
       time: currentTime,
       user: userId || null,
       deliveryTime: ordersEstimatedDeliveryTime,
@@ -61,7 +62,16 @@ router.post("/api/beans/orders", async (req, res) => {
       await user.save();
     }
 
-    res.json({ order, email, status: order.status });
+    const orderInfo = {
+      customer: {
+        email
+      },
+
+      "Order Details": { order, orderTotal: totalPrice }
+    };
+    res.json({
+      orderInfo
+    });
   } catch (error) {
     console.error(error);
     res.status(400).json({ error: error.message });

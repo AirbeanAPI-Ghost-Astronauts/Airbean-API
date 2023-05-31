@@ -35,20 +35,15 @@ List of available Endpoints :
 
 **GET "/api/beans/"** : to load the menu
 
-**POST "/api/user/signup"** : to signup in the app
+![resonse example](https://raw.githubusercontent.com/AirbeanAPI-Ghost-Astronauts/Airbean-API/main/screenshots/screenshot1.png)
 
-```bash
+**POST "/api/user/signup"** :
 
-  {
-	"email": "name@email.com",
-	"password": "1234"
-}
+#### to signup in the app
 
-```
+#### example body object
 
-**POST "/api/user/login"** : to login in the app
-
-```bash
+```http
 
   {
 	"email": "name@email.com",
@@ -57,25 +52,51 @@ List of available Endpoints :
 
 ```
 
-**POST ""/api/beans/orders"** : To create a new order in the app.
+| Parameter  | Type     | Description   |
+| :--------- | :------- | :------------ |
+| `email`    | `string` | **Required**. |
+| `password` | `string` | **Required**. |
 
-If you wanna create an order as a registered user , you need to add the userId from MongoDbs database
+**POST "/api/user/login"** :
+
+to login in the app
+
+#### example body object
+
+```http
+
+  {
+	"email": "name@email.com",
+	"password": "1234"
+}
+
+```
+
+**POST "/api/beans/orders"** : To create a new order in the app.
+
+If you wanna create an order as a registered user , you need to add the userId from MongoDbs database.
+
+| Parameter  | Type     | Description                          |
+| :--------- | :------- | :----------------------------------- |
+| `userId`   | `string` | **Required**. Users ID               |
+| `id`       | `string` | **Required**. Items ID from the menu |
+| `quantity` | `number` | **Required**.                        |
 
 for example :
 
 ```bash
 
 {
-  "userId": "6475a4093e4bf94e3bdea98f",
+  "userId": "6477483c98f2ef34a36b755c",
   "cart": [
     {
-      "id": "6475a8dbbe0c82ff4cf1fc30",
+      "id": "6475a8dbbe0c82ff4cf1fc34",
       "quantity": 1
 
     },
-		  {
-      "id": "6475a8dbbe0c82ff4cf1fc31",
-      "quantity": 1
+       {
+      "id": "6475a8dbbe0c82ff4cf1fc35",
+      "quantity": 2
 
     }
   ]
@@ -84,6 +105,12 @@ for example :
 ```
 
 if you want to create a new order as a guest you need to have :
+
+| Parameter    | Type     | Description                            |
+| :----------- | :------- | :------------------------------------- |
+| `guestEmail` | `string` | **Required**. Add an email to checkout |
+| `id`         | `string` | **Required**. Items ID from the menu   |
+| `quantity`   | `number` | **Required**.                          |
 
 ```bash
 
@@ -105,13 +132,13 @@ if you want to create a new order as a guest you need to have :
 
 ```
 
-**GET "/api/user/:id/history"** :
+**GET "/api/user/${id}/history"** :
 to check the orders history you can use this method. You need to add the users id from Mongos database.
 
 example url :
 
 ```bash
-http://localhost:5000/api/user/6475a4093e4bf94e3bdea98f/history/
+http://localhost:5000/api/user/6477483c98f2ef34a36b755c/history/
 
 ```
 
@@ -119,4 +146,4 @@ http://localhost:5000/api/user/6475a4093e4bf94e3bdea98f/history/
 
 Each coffees delivery time is 10 minutes , so this route compares the current time with estimated delivery time and shows if the order has been deliverd or still ongoing.
 
- ![Response Example]((https://raw.githubusercontent.com/AirbeanAPI-Ghost-Astronauts/Airbean-API/main/screenshots/screenshot1.png))
+![resonse example](https://raw.githubusercontent.com/AirbeanAPI-Ghost-Astronauts/Airbean-API/main/screenshots/screenshot1.png)

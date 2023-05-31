@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const moment = require("moment");
-
 const { User } = require("../models/dataModel");
 
 router.get("/api/user/:id/history", async (req, res) => {
@@ -57,21 +56,31 @@ router.get("/api/user/status/:id", async (req, res) => {
             ? "You order has been delivered successfully"
             : `Your order will be delivered in ${remainingTime} minutes`;
 
+        const totalPrice = order.cart.reduce(
+          (acc, item) => acc + item.price,
+          0
+        );
+
         return {
-          id: order._id,
+          "Order Number": order._id,
+          "Order Created at": order.time,
           cart: order.cart.map((item) => ({
             name: item.name,
             quantity: item.quantity,
             price: item.price
           })),
-          orderCreationTime: order.time,
+          "Order Total": totalPrice,
           status,
           message
         };
       })
     );
 
-    res.json({ orders });
+    res.json({
+      data: {
+        orders: orders
+      }
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
