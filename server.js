@@ -8,7 +8,6 @@ const menuRoute = require("./routes/menuRoute.js");
 const userAuthenticationRoute = require("./routes/userAuthenticationRoute.js");
 const orderRoute = require("./routes/ordersRoute.js");
 const userHistoryRoute = require("./routes/userHistoryRoute.js");
-
 app.use(menuRoute, userAuthenticationRoute, orderRoute, userHistoryRoute);
 
 const PORT = process.env.PORT || 5000;

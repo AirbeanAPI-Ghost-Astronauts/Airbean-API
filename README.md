@@ -33,23 +33,25 @@ Start the server
 
 List of available Endpoints :
 
-**GET "/api/beans/"** : to load the menu
+#### Get all the items from the menu
 
-![resonse example](https://raw.githubusercontent.com/AirbeanAPI-Ghost-Astronauts/Airbean-API/main/screenshots/screenshot1.png)
-
-**POST "/api/user/signup"** :
+```http
+  GET /api/beans/
+```
 
 #### to signup in the app
 
-#### example body object
-
 ```http
+  POST /api/user/signup
+```
 
-  {
-	"email": "name@email.com",
-	"password": "1234"
+Example body object:
+
+```json
+{
+  "email": "name@email.com",
+  "password": "1234"
 }
-
 ```
 
 | Parameter  | Type     | Description   |
@@ -57,24 +59,33 @@ List of available Endpoints :
 | `email`    | `string` | **Required**. |
 | `password` | `string` | **Required**. |
 
-**POST "/api/user/login"** :
-
-to login in the app
-
-#### example body object
+#### Login in the app:
 
 ```http
-
-  {
-	"email": "name@email.com",
-	"password": "1234"
-}
-
+  POST /api/user/login
 ```
 
-**POST "/api/beans/orders"** : To create a new order in the app.
+example body object:
 
-If you wanna create an order as a registered user , you need to add the userId from MongoDbs database.
+```json
+{
+  "email": "name@email.com",
+  "password": "1234"
+}
+```
+
+| Parameter  | Type     | Description   |
+| :--------- | :------- | :------------ |
+| `email`    | `string` | **Required**. |
+| `password` | `string` | **Required**. |
+
+#### Create new orders:
+
+```http
+  POST /api/beans/orders
+```
+
+- To create an order as a registered user:
 
 | Parameter  | Type     | Description                          |
 | :--------- | :------- | :----------------------------------- |
@@ -82,29 +93,25 @@ If you wanna create an order as a registered user , you need to add the userId f
 | `id`       | `string` | **Required**. Items ID from the menu |
 | `quantity` | `number` | **Required**.                        |
 
-for example :
+Example body object:
 
-```bash
-
+```json
 {
   "userId": "6477483c98f2ef34a36b755c",
   "cart": [
     {
       "id": "6475a8dbbe0c82ff4cf1fc34",
       "quantity": 1
-
     },
-       {
+    {
       "id": "6475a8dbbe0c82ff4cf1fc35",
       "quantity": 2
-
     }
   ]
 }
-
 ```
 
-if you want to create a new order as a guest you need to have :
+- To create an order as a guest user:
 
 | Parameter    | Type     | Description                            |
 | :----------- | :------- | :------------------------------------- |
@@ -112,38 +119,52 @@ if you want to create a new order as a guest you need to have :
 | `id`         | `string` | **Required**. Items ID from the menu   |
 | `quantity`   | `number` | **Required**.                          |
 
-```bash
+Example body object:
 
+```json
 {
- "guestEmail": "guest@email.com",
-"cart": [
+  "guestEmail": "guest@email.com",
+  "cart": [
     {
       "id": "6475a8dbbe0c82ff4cf1fc30",
       "quantity": 2
-
     },
-		  {
+    {
       "id": "6475a8dbbe0c82ff4cf1fc31",
       "quantity": 5
-
     }
   ]
 }
-
 ```
 
-**GET "/api/user/${id}/history"** :
-to check the orders history you can use this method. You need to add the users id from Mongos database.
+#### Get users order history
 
-example url :
+_to check the orders history you can use this method. You need to add the users id from Mongos database._
+
+```http
+  GET /api/user/${id}/history
+```
+
+Example url:
 
 ```bash
 http://localhost:5000/api/user/6477483c98f2ef34a36b755c/history/
 
 ```
 
-**GET /api/user/status/:id"** : To check your orders status you can use this route.
+#### Check order status
 
-Each coffees delivery time is 10 minutes , so this route compares the current time with estimated delivery time and shows if the order has been deliverd or still ongoing.
+```http
+  GET /api/user/status/${id}"
+```
+
+_Each coffees delivery time is 10 minutes , so this route compares the current time with estimated delivery time and shows if the order has been delivered or still ongoing._
+
+Example url:
+
+```bash
+http://localhost:5000/api/user/status/6477483c98f2ef34a36b755c
+
 
 ![resonse example](https://raw.githubusercontent.com/AirbeanAPI-Ghost-Astronauts/Airbean-API/main/screenshots/screenshot1.png)
+```
