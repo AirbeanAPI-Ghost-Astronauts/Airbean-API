@@ -11,7 +11,7 @@ const userHistoryRoute = require("./routes/userHistoryRoute.js");
 
 app.use(menuRoute, userAuthenticationRoute, orderRoute, userHistoryRoute);
 
-const PORT = process.env.PORT || 5005;
+const PORT = process.env.PORT || 5000;
 
 const run = async () => {
   try {
