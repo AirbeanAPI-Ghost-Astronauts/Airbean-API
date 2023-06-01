@@ -4,7 +4,7 @@ const orderSchema = new mongoose.Schema(
   {
     cart: [
       {
-        item: {
+        id: {
           type: mongoose.Schema.Types.ObjectId,
           ref: "Menu",
           required: true

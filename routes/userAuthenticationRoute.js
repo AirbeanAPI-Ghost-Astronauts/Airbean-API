@@ -3,8 +3,9 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 
 const { User } = require("../models/dataModel");
+const { authValidation } = require("../middleware/validation");
 
-router.post("/api/user/signup", async (req, res) => {
+router.post("/api/user/signup", authValidation, async (req, res) => {
   const { email, password } = req.body;
 
   try {
@@ -25,7 +26,7 @@ router.post("/api/user/signup", async (req, res) => {
   }
 });
 
-router.post("/api/user/login", async (req, res) => {
+router.post("/api/user/login", authValidation, async (req, res) => {
   const { email, password } = req.body;
 
   try {

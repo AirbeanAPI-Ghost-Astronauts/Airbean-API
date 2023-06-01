@@ -3,7 +3,9 @@ const router = express.Router();
 const moment = require("moment");
 const { User } = require("../models/dataModel");
 
-router.get("/api/user/:id/history", async (req, res) => {
+const { checkId } = require("../middleware/validation");
+
+router.get("/api/user/:id/history", checkId, async (req, res) => {
   const { id } = req.params;
   try {
     const user = await User.findById(id).populate("orders");
@@ -18,7 +20,7 @@ router.get("/api/user/:id/history", async (req, res) => {
   }
 });
 
-router.get("/api/user/status/:id", async (req, res) => {
+router.get("/api/user/status/:id", checkId, async (req, res) => {
   const { id } = req.params;
   try {
     const user = await User.findById(id).populate({
@@ -58,6 +60,7 @@ router.get("/api/user/status/:id", async (req, res) => {
 
         const totalPrice = order.cart.reduce(
           (acc, item) => acc + item.price,
+
           0
         );
 
